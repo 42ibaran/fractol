@@ -6,7 +6,7 @@
 /*   By: ibaran <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/13 16:36:54 by ibaran            #+#    #+#             */
-/*   Updated: 2019/03/16 05:02:48 by ibaran           ###   ########.fr       */
+/*   Updated: 2019/03/18 17:46:24 by ibaran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,16 @@
 # include "../libft/includes/libft.h"
 # include "../minilibx/mlx.h"
 
-# define WINDOW_X 1000
-# define WINDOW_Y 1000
-# define IMAGE_X 1000
-# define IMAGE_Y 1000
+# define WINDOW_X 1500
+# define WINDOW_Y 1500
+# define IMAGE_X 1500
+# define IMAGE_Y 1500
 # define IMG_MID_X (IMAGE_X / 2)
-# define IMG_MID_Y (IMAGE_Y / 2) 
+# define IMG_MID_Y (IMAGE_Y / 2)
 # define WIN_MID_X (WINDOW_X / 2)
 # define WIN_MID_Y (WINDOW_Y / 2)
-# define GOLD ((1 + sqrt(5)) / 2)
-# define ZOOM_NUM 1.05
+# define GOLD ((1 + sqrt(5.0)) / 2)
+# define ZOOM_NUM 105
 
 # define LEFT_BORDER_X ((float)(WINDOW_X - IMAGE_X) / 2)
 # define LEFT_BORDER_Y ((float)(WINDOW_Y - IMAGE_Y) / 2)
@@ -63,11 +63,15 @@
 # define CR_STEP ((MAX_X - MIN_X) / IMAGE_X)
 # define CI_STEP ((MAX_Y - MIN_Y) / IMAGE_Y)
 
+# define COLOR_REF fractol->color_reference
+# define FIX_JULIA fractol->fix_julia_flag
+# define JUL_N fractol->jul_n
+
 typedef struct		s_point
 {
-	float			x;
-	float			y;
-	float			iter;
+	double			x;
+	double			y;
+	int				iter;
 	unsigned int	color;
 }					t_point;
 
@@ -80,18 +84,21 @@ typedef struct		s_fractol
 	t_point			**matrix;
 	char			*name;
 	int				iter_range;
-	float			fract_min_x;
-	float			fract_min_y;
-	float			fract_max_x;
-	float			fract_max_y;
-	float			step_x;
-	float			step_y;
-	float			cr;
-	float			ci;
+	double			fract_min_x;
+	double			fract_min_y;
+	double			fract_max_x;
+	double			fract_max_y;
+	double			step_x;
+	double			step_y;
+	double			cr;
+	double			ci;
 	int				mouse_current_x;
 	int				mouse_current_y;
 	int				mouse_previous_x;
 	int				mouse_previous_y;
+	unsigned int	color_reference;
+	char			fix_julia_flag;
+	int				jul_n;
 }					t_fractol;
 
 typedef struct		s_thread
@@ -100,8 +107,8 @@ typedef struct		s_thread
 	t_fractol		*fractol;
 	int				i;
 	int				j;
-	float			x;
-	float			y;
+	double			x;
+	double			y;
 	int				(*function)(t_fractol*, int ,int);
 }					t_thread;
 
@@ -136,9 +143,9 @@ size_t				f_draw(t_fractol *fractol);
 /*
 ** Calculation
 */
-/*void				*f_mandelbrot(t_thread *thread);*/
-//void				*f_julia(void *thread);
 int					f_mandelbrot(t_fractol *fractol, int i, int j);
 int					f_julia(t_fractol *fractol, int i, int j);
 int					f_burning_ship(t_fractol *fractol, int i, int j);
+int					f_newton(t_fractol *fractol, int i, int j);
+
 #endif

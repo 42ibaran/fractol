@@ -6,7 +6,7 @@
 #    By: ibaran <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/03/06 09:08:51 by ibaran            #+#    #+#              #
-#    Updated: 2019/03/16 03:15:29 by ibaran           ###   ########.fr        #
+#    Updated: 2019/03/18 13:07:39 by ibaran           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ CC := gcc
 FRAMEWORK := -framework OpenGL -framework AppKit
 LIB := libft/libft.a minilibx/libmlx.a
 INCLUDES := -I minilibx/ -I includes/ -I libft/includes/
-FLAGS := -Wall -Wextra -Werror -O3
+FLAGS := -Wall -Wextra -Werror -O2
 
 SRCS_PATH := ./sources/
 OBJS_PATH := ./objects/

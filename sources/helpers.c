@@ -6,7 +6,7 @@
 /*   By: ibaran <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/13 19:10:25 by ibaran            #+#    #+#             */
-/*   Updated: 2019/03/15 18:39:35 by ibaran           ###   ########.fr       */
+/*   Updated: 2019/03/18 17:19:19 by ibaran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,9 @@ int		f_error(t_fractol *fractol)
 	ft_printf("error occured\n");
 	ft_printf("note: ussage: fractol <type>\n");
 	ft_printf("available types:\n");
-	ft_printf("  - Julia\n");
 	ft_printf("  - Mandelbrot\n");
+	ft_printf("  - Julia\n");
+	ft_printf("  - Newton\n");
 	ft_printf("  - BurningShip\n");
 	return (1);
 }
@@ -37,8 +38,8 @@ size_t		f_initialize(t_fractol *fractol, char *input)
 	MAX_X = 2.0;
 	MIN_Y = -2.0;
 	MAX_Y = 2.0;
-	STEP_X = (MAX_X - MIN_X) / (float)IMAGE_X;
-	STEP_Y = (MAX_Y - MIN_Y) / (float)IMAGE_Y;
+	STEP_X = (MAX_X - MIN_X) / (double)IMAGE_X;
+	STEP_Y = (MAX_Y - MIN_Y) / (double)IMAGE_Y;
 	CR = GOLD - 2;
 	CI = GOLD - 1;
 	MOUSE_CUR_X = 0;
@@ -46,6 +47,9 @@ size_t		f_initialize(t_fractol *fractol, char *input)
 	MOUSE_PRE_X = 0;
 	MOUSE_PRE_Y = 0;
 	ITER_RANGE = 15;
+	COLOR_REF = 0xCCFFAA;
+	FIX_JULIA = 'n';
+	JUL_N = 2;
 	return (0);
 }
 
@@ -55,7 +59,8 @@ size_t		f_check(int ac, char **av)
 		return (1);
 	if (ft_strcmp(av[1], "Julia") != 0 &&
 			ft_strcmp(av[1], "Mandelbrot") != 0 &&
-			ft_strcmp(av[1], "BurningShip") != 0)
+			ft_strcmp(av[1], "BurningShip") != 0 &&
+			ft_strcmp(av[1], "Newton") != 0)
 		return (1);
 	return (0);
 }

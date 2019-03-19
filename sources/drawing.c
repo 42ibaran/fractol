@@ -6,7 +6,7 @@
 /*   By: ibaran <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/14 12:42:19 by ibaran            #+#    #+#             */
-/*   Updated: 2019/03/15 18:33:59 by ibaran           ###   ########.fr       */
+/*   Updated: 2019/03/18 17:20:04 by ibaran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ void		*f_xloop(void *ptr)
 {
 	int			i;
 	int			j;
-	float		x;
-	float		y;
+	double		x;
+	double		y;
 	t_fractol	*fractol;
 	t_thread	*thread;
 
@@ -41,7 +41,7 @@ void		*f_xloop(void *ptr)
 
 size_t		f_fill_matrix(t_fractol *fractol, int function())
 {
-	float		y;
+	double		y;
 	int			i;
 	t_thread	thread_y[IMAGE_Y];
 
@@ -66,32 +66,6 @@ size_t		f_fill_matrix(t_fractol *fractol, int function())
 	return (0);
 }
 
-void		f_fill_image(t_fractol *fractol)
-{
-	int		i;
-	int		j;
-	int		k;
-
-	k = 0;
-	i = 0;
-	while (i < IMAGE_Y)
-	{
-		j = 0;
-		while (j < IMAGE_X)
-		{
-			IMG_STR[k + 0] = (char)(MATRIX[i][j].color % 256 % 256);
-			IMG_STR[k + 1] = (char)(MATRIX[i][j].color / 256 % 256);
-			IMG_STR[k + 2] = (char)(MATRIX[i][j].color / 256 / 256);
-			IMG_STR[k + 3] = 0;
-			k += 4;
-			j++;
-		}
-		i++;
-	}
-	mlx_put_image_to_window(MLX_PTR, WIN_PTR, IMG_PTR,
-		(WINDOW_X - IMAGE_X) / 2, (WINDOW_Y - IMAGE_Y) / 2);
-}
-
 size_t		f_draw(t_fractol *fractol)
 {
 	if (ft_strcmp(fractol->name, "Mandelbrot") == 0)
@@ -100,9 +74,9 @@ size_t		f_draw(t_fractol *fractol)
 		f_fill_matrix(fractol, &f_julia);
 	if (ft_strcmp(fractol->name, "BurningShip") == 0)
 		f_fill_matrix(fractol, &f_burning_ship);
+	if (ft_strcmp(fractol->name, "Newton") == 0)
+		f_fill_matrix(fractol, &f_newton);
 /*	if (ft_strcmp(fractol->name, "Mandelbrot") == 0)
-		f_draw_mandelbrot(fractol);
-	if (ft_strcmp(fractol->name, "Mandelbrot") == 0)
 		f_draw_mandelbrot(fractol);*/
 //	f_fill_image(fractol);
 	mlx_put_image_to_window(MLX_PTR, WIN_PTR, IMG_PTR,
