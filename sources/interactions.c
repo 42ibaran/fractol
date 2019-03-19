@@ -6,7 +6,7 @@
 /*   By: ibaran <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/19 13:32:36 by ibaran            #+#    #+#             */
-/*   Updated: 2019/03/19 15:26:53 by ibaran           ###   ########.fr       */
+/*   Updated: 2019/03/19 16:19:44 by ibaran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,12 +72,9 @@ int		f_mouse_move(int x, int y, t_fractol *fractol)
 	if (f_mouse_in_window(x, y) == 0)
 	{
 		if (MOUSE_PRE_X != MOUSE_CUR_X)
-			CR = STEP_X * (MOUSE_CUR_X - (IMAGE_X / 2) -
-				(WINDOW_X - IMAGE_X) / 2);
+			CR = STEP_X * (double)(MOUSE_CUR_X - (IMAGE_X / 2));
 		if (MOUSE_PRE_Y != MOUSE_CUR_Y)
-			CI = STEP_Y * (MOUSE_CUR_Y - (IMAGE_Y / 2) -
-				(WINDOW_Y - IMAGE_Y) / 2);
-		ft_printf("CR = %.10f | CI = %.10f\n", CR, CI);
+			CI = STEP_Y * (double)(MOUSE_CUR_Y - (IMAGE_Y / 2));
 		f_draw(fractol);
 	}
 	return (0);

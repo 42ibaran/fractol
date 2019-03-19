@@ -6,7 +6,7 @@
 /*   By: ibaran <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/19 13:27:50 by ibaran            #+#    #+#             */
-/*   Updated: 2019/03/19 15:39:15 by ibaran           ###   ########.fr       */
+/*   Updated: 2019/03/19 16:01:05 by ibaran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	f_key_esc(int key, t_fractol *fractol)
 	mlx_clear_window(MLX_PTR, WIN_PTR);
 	mlx_destroy_window(MLX_PTR, WIN_PTR);
 	f_free_points(fractol);
-	ft_printf("\nGood bye and have a good day!\n");
+	ft_printf("Good bye and have a good day!\n");
 	exit(0);
 }
 
@@ -29,7 +29,6 @@ void	f_key_iteration(int key, t_fractol *fractol)
 		ITER_RANGE++;
 	else if (key == 78 && ITER_RANGE != 0)
 		ITER_RANGE--;
-	ft_printf("Maximum iteration = %d\n", ITER_RANGE);
 }
 
 void	f_key_trans(int key, t_fractol *fractol)

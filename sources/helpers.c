@@ -6,7 +6,7 @@
 /*   By: ibaran <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/13 19:10:25 by ibaran            #+#    #+#             */
-/*   Updated: 2019/03/19 15:32:30 by ibaran           ###   ########.fr       */
+/*   Updated: 2019/03/19 16:05:42 by ibaran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ size_t		f_initialize(t_fractol *fractol, char *input)
 	MOUSE_PRE_Y = 0;
 	ITER_RANGE = 50;
 	COLOR_REF = 0xEEFFDD;
-	FIX_JULIA = 'y';
+	FIX_JULIA = 'n';
 	COLOR_ALG = 'i';
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: ibaran <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/13 16:36:54 by ibaran            #+#    #+#             */
-/*   Updated: 2019/03/19 14:58:53 by ibaran           ###   ########.fr       */
+/*   Updated: 2019/03/19 16:23:17 by ibaran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,6 @@
 # define MOUSE_PRE_X fractol->mouse_previous_x
 # define MOUSE_PRE_Y fractol->mouse_previous_y
 
-# define CR_STEP ((MAX_X - MIN_X) / IMAGE_X)
-# define CI_STEP ((MAX_Y - MIN_Y) / IMAGE_Y)
-
 # define COLOR_REF fractol->color_reference
 # define COLOR_ALG fractol->color_algorithm
 # define FIX_JULIA fractol->fix_julia_flag
@@ -105,7 +102,7 @@ typedef struct		s_thread
 	int				j;
 	double			x;
 	double			y;
-	int				(*function)(t_fractol*, int ,int);
+	int				(*function)(t_fractol*, int, int);
 }					t_thread;
 
 /*
