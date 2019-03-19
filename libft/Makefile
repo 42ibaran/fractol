@@ -6,7 +6,7 @@
 #    By: ibaran <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/03/13 14:57:26 by ibaran            #+#    #+#              #
-#    Updated: 2019/03/19 15:38:26 by ibaran           ###   ########.fr        #
+#    Updated: 2019/03/19 15:54:04 by ibaran           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -64,15 +64,15 @@ $(OBJS_PATH)%.o: $(PRINTF_SRCS_PATH)%.c
 	@$(CC) $(FLAGS) -o $@ -c $< $(INCLUDES)
 
 $(NAME): $(OBJS) $(PRINTF_OBJS)
-	@echo [Compiling libft]
 	@ar rc $@ $^
+	@echo [Libft Compiled]
 
 clean:
-	@echo [Removing objects]
 	@/bin/rm -f $(OBJS)
+	@echo [Libft Objects Removed]
 
 fclean: clean
-	@echo [Removing Archive]
 	@/bin/rm -f $(NAME)
+	@echo [Libft Archive Removed]
 
 re: fclean all

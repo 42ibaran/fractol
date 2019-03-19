@@ -6,7 +6,7 @@
 #    By: ibaran <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/03/06 09:08:51 by ibaran            #+#    #+#              #
-#    Updated: 2019/03/19 15:37:02 by ibaran           ###   ########.fr        #
+#    Updated: 2019/03/19 15:52:38 by ibaran           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,23 +52,21 @@ $(OBJS_PATH)%.o: $(SRCS_PATH)%.c
 	@$(CC) $(FLAGS) -o $@ -c $< $(INCLUDES)
 
 $(NAME): $(OBJS)
-	@echo "[Compiling Libft]"
 	@make -C libft/
-	@echo "[Compiling MiniLibX]"
 	@make -C minilibx/
-	@echo "[Compiling Fractol]"
 	@$(CC) $(FLAGS) -o $@ $^ $(LIB) $(FRAMEWORK)
+	@echo "[Fractol Compiled]"
 
 clean:
-	@echo "[Cleaning All]"
 	@make -C libft/ clean
-	@make -s -C minilibx/ clean
+	@make -C minilibx/ clean
 	@/bin/rm -f $(OBJS)
+	@echo "[Fractol Objects Removed]"
 
 fclean: clean
-	@make -s -C libft/ fclean
-	@echo "[Fcleaning All]"
+	@make -C libft/ fclean
 	@/bin/rm -f $(NAME)
+	@echo "[Fractol Removed]"
 
 norme:
 	@norminette $(SRCS) $(INCL)
