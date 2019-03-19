@@ -6,7 +6,7 @@
 #    By: ibaran <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/03/13 14:57:26 by ibaran            #+#    #+#              #
-#    Updated: 2019/03/13 16:10:42 by ibaran           ###   ########.fr        #
+#    Updated: 2019/03/19 15:38:26 by ibaran           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,7 +51,7 @@ OBJS_NAME := $(SRCS_NAME:.c=.o)
 PRINTF_OBJS_NAME := $(PRINTF_SRCS_NAME:.c=.o)
 
 OBJS := $(patsubst %,$(OBJS_PATH)%,$(OBJS_NAME))
-PRINTF_OBJS := $(patsubst %,$(PRINTF_OBJS_PATH)%,$(PRINTF_OBJS_NAME))
+OBJS += $(patsubst %,$(OBJS_PATH)%,$(PRINTF_OBJS_NAME))
 
 all: $(NAME)
 
@@ -59,7 +59,7 @@ $(OBJS_PATH)%.o: $(SRCS_PATH)%.c
 	@echo [CC] $<
 	@$(CC) $(FLAGS) -o $@ -c $< $(INCLUDES)
 
-$(PRINTF_OBJS_PATH)%.o: $(PRINTF_SRCS_PATH)%.c
+$(OBJS_PATH)%.o: $(PRINTF_SRCS_PATH)%.c
 	@echo [CC] $<
 	@$(CC) $(FLAGS) -o $@ -c $< $(INCLUDES)
 

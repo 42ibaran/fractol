@@ -6,7 +6,7 @@
 #    By: ibaran <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/03/06 09:08:51 by ibaran            #+#    #+#              #
-#    Updated: 2019/03/18 13:07:39 by ibaran           ###   ########.fr        #
+#    Updated: 2019/03/19 15:37:02 by ibaran           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,10 +32,11 @@ INCL_PATH := ./includes/
 SRCS_NAME := \
 main.c \
 helpers.c \
-keys_1.c \
+interactions.c \
 allocation.c \
 drawing.c \
-calculation.c
+calculation.c \
+change_params.c
 OBJS_NAME := $(SRCS_NAME:.c=.o)
 INCL_NAME := \
 fractol.h
@@ -51,14 +52,21 @@ $(OBJS_PATH)%.o: $(SRCS_PATH)%.c
 	@$(CC) $(FLAGS) -o $@ -c $< $(INCLUDES)
 
 $(NAME): $(OBJS)
+	@echo "[Compiling Libft]"
+	@make -C libft/
+	@echo "[Compiling MiniLibX]"
+	@make -C minilibx/
 	@echo "[Compiling Fractol]"
 	@$(CC) $(FLAGS) -o $@ $^ $(LIB) $(FRAMEWORK)
 
 clean:
 	@echo "[Cleaning All]"
+	@make -C libft/ clean
+	@make -s -C minilibx/ clean
 	@/bin/rm -f $(OBJS)
 
 fclean: clean
+	@make -s -C libft/ fclean
 	@echo "[Fcleaning All]"
 	@/bin/rm -f $(NAME)
 

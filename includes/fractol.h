@@ -6,7 +6,7 @@
 /*   By: ibaran <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/13 16:36:54 by ibaran            #+#    #+#             */
-/*   Updated: 2019/03/18 17:46:24 by ibaran           ###   ########.fr       */
+/*   Updated: 2019/03/19 14:58:53 by ibaran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,21 +19,17 @@
 # include "../libft/includes/libft.h"
 # include "../minilibx/mlx.h"
 
-# define WINDOW_X 1500
-# define WINDOW_Y 1500
-# define IMAGE_X 1500
-# define IMAGE_Y 1500
+# define WINDOW_X 900
+# define WINDOW_Y 900
+# define IMAGE_X 900
+# define IMAGE_Y 900
 # define IMG_MID_X (IMAGE_X / 2)
 # define IMG_MID_Y (IMAGE_Y / 2)
 # define WIN_MID_X (WINDOW_X / 2)
 # define WIN_MID_Y (WINDOW_Y / 2)
 # define GOLD ((1 + sqrt(5.0)) / 2)
 # define ZOOM_NUM 105
-
-# define LEFT_BORDER_X ((float)(WINDOW_X - IMAGE_X) / 2)
-# define LEFT_BORDER_Y ((float)(WINDOW_Y - IMAGE_Y) / 2)
-# define RIGHT_BORDER_X (((float)(WINDOW_X - IMAGE_X) / 2) + (float)IMAGE_X)
-# define RIGHT_BORDER_Y (((float)(WINDOW_Y - IMAGE_Y) / 2) + (float)IMAGE_Y)
+# define MIN_RANGE_XY 0.00000000001
 
 # define MLX_PTR fractol->mlx_ptr
 # define WIN_PTR fractol->win_ptr
@@ -64,8 +60,8 @@
 # define CI_STEP ((MAX_Y - MIN_Y) / IMAGE_Y)
 
 # define COLOR_REF fractol->color_reference
+# define COLOR_ALG fractol->color_algorithm
 # define FIX_JULIA fractol->fix_julia_flag
-# define JUL_N fractol->jul_n
 
 typedef struct		s_point
 {
@@ -98,7 +94,7 @@ typedef struct		s_fractol
 	int				mouse_previous_y;
 	unsigned int	color_reference;
 	char			fix_julia_flag;
-	int				jul_n;
+	char			color_algorithm;
 }					t_fractol;
 
 typedef struct		s_thread
@@ -118,16 +114,15 @@ typedef struct		s_thread
 int					f_error(t_fractol *fractol);
 size_t				f_initialize(t_fractol *fractol, char *input);
 size_t				f_check(int ac, char **av);
+size_t				f_mouse_in_window(int x, int y);
+void				f_welcome(void);
 
 /*
 ** Keys
 */
 int					f_key_press(int key, t_fractol *fractol);
-int					f_key_release(int key, t_fractol *fractol);
 int					f_mouse_press(int button, int x, int y, t_fractol *fractol);
-int					f_mouse_release(int button, int x, int y, t_fractol *fractol);
 int					f_mouse_move(int x, int y, t_fractol *fractol);
-int					f_expose(t_fractol *fractol);
 
 /*
 ** Allocation
@@ -147,5 +142,14 @@ int					f_mandelbrot(t_fractol *fractol, int i, int j);
 int					f_julia(t_fractol *fractol, int i, int j);
 int					f_burning_ship(t_fractol *fractol, int i, int j);
 int					f_newton(t_fractol *fractol, int i, int j);
+
+/*
+** Change params
+*/
+void				f_key_esc(int key, t_fractol *fractol);
+void				f_key_iteration(int key, t_fractol *fractol);
+void				f_key_trans(int key, t_fractol *fractol);
+void				f_key_color_ref(int key, t_fractol *fractol);
+void				f_key_color_alg(int key, t_fractol *fractol);
 
 #endif

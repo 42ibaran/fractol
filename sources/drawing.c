@@ -6,7 +6,7 @@
 /*   By: ibaran <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/14 12:42:19 by ibaran            #+#    #+#             */
-/*   Updated: 2019/03/18 17:20:04 by ibaran           ###   ########.fr       */
+/*   Updated: 2019/03/19 14:17:53 by ibaran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,26 +15,21 @@
 
 void		*f_xloop(void *ptr)
 {
-	int			i;
-	int			j;
-	double		x;
-	double		y;
 	t_fractol	*fractol;
 	t_thread	*thread;
 
 	thread = (t_thread*)ptr;
 	fractol = thread->fractol;
-	y = thread->y;
-	i = thread->i;
-	x = MIN_X;
-	j = 0;
-	while (j < IMAGE_X)
+	thread->x = MIN_X;
+	thread->j = 0;
+	while (thread->j < IMAGE_X)
 	{
-		MATRIX[i][j].x = x;
-		MATRIX[i][j].y = y;
-		MATRIX[i][j].iter = thread->function(fractol, i, j);
-		x += STEP_X;
-		j++;
+		MATRIX[thread->i][thread->j].x = thread->x;
+		MATRIX[thread->i][thread->j].y = thread->y;
+		MATRIX[thread->i][thread->j].iter =
+			thread->function(fractol, thread->i, thread->j);
+		thread->x += STEP_X;
+		thread->j++;
 	}
 	return (NULL);
 }
@@ -74,32 +69,7 @@ size_t		f_draw(t_fractol *fractol)
 		f_fill_matrix(fractol, &f_julia);
 	if (ft_strcmp(fractol->name, "BurningShip") == 0)
 		f_fill_matrix(fractol, &f_burning_ship);
-	if (ft_strcmp(fractol->name, "Newton") == 0)
-		f_fill_matrix(fractol, &f_newton);
-/*	if (ft_strcmp(fractol->name, "Mandelbrot") == 0)
-		f_draw_mandelbrot(fractol);*/
-//	f_fill_image(fractol);
 	mlx_put_image_to_window(MLX_PTR, WIN_PTR, IMG_PTR,
 	(WINDOW_X - IMAGE_X) / 2, (WINDOW_Y - IMAGE_Y) / 2);
 	return (0);
 }
-
-	/*	x = MIN_X;
-		j = 0;
-		while (j < IMAGE_X)
-		{
-			MATRIX[i][j].x = x;
-			MATRIX[i][j].y = y;
-			thread[i].fractol = fractol;
-			thread[i].i = i;
-			thread[i].j = j;
-			thread[i].x = x;
-			thread[i].y = y;
-//			thread[i].fun = function;
-			pthread_create(&(thread[i].thread_id), NULL, blabla, &thread[i]);
-		//	wait(NULL);
-			pthread_join(thread[i].thread_id, NULL);
-//			MATRIX[i][j].iter = function(fractol, i, j);
-			x += STEP_X;
-			j++;
-		}*/
